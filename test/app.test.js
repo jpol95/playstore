@@ -38,16 +38,14 @@ describe('Google play app', () => {
         .expect("Content-Type", /json/)
         .then(res => {
             let sorted = true;
-            res.body.forEach((current, index) => {
-                if (index != 0) {
-                    if (current.Rating < res.body[index - 1].Rating){
+            for (let index = 1; index < res.body.length; index++){
+                    if ( res.body[index - 1].Rating < res.body[index - 1].Rating){
                          sorted = false
+                         break
                 }
-            }})
+            }
+            
             expect(sorted).to.be.true
-            
-            
-
         })
     })
 })
